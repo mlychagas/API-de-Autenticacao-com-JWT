@@ -93,29 +93,44 @@ npm install
 
 ### 3. Configurar Variáveis de Ambiente
 
-**Opção A: Usando o arquivo `.env_exemplo` (Recomendado)**
+O arquivo **`.env_exemplo`** contém o modelo puro de código com todas as variáveis necessárias. Siga os passos:
+
+**Passo 1: Copiar o arquivo**
 
 ```bash
-# 1. Copie o arquivo de exemplo
 cp .env_exemplo .env
-
-# 2. Edite o arquivo .env com seus valores
-# - Substitua as chaves de exemplo por chaves fortes
-# - Ajuste PORT se necessário (padrão: 3000)
 ```
 
-**Opção B: Gerar chaves seguras para produção**
+**Passo 2: Editar as variáveis no arquivo `.env`**
+
+Abra o arquivo `.env` e configure:
+
+| Variável | Descrição | Valor Padrão |
+|----------|-----------|--------------|
+| **NODE_ENV** | Ambiente de execução | `development` ou `production` |
+| **PORT** | Porta do servidor | `3000` |
+| **JWT_ACCESS_SECRET** | Chave para assinar Access Tokens | Chave aleatória de 32+ caracteres |
+| **JWT_REFRESH_SECRET** | Chave para assinar Refresh Tokens | Chave aleatória de 32+ caracteres (diferente do ACCESS) |
+| **JWT_ACCESS_EXPIRATION** | Duração do Access Token | `15m` (15 minutos) |
+| **JWT_REFRESH_EXPIRATION** | Duração do Refresh Token | `7d` (7 dias) |
+
+**Passo 3: Gerar chaves seguras para produção** ⚠️
+
+Em desenvolvimento, você pode usar os valores do exemplo. **Em produção, gere chaves fortes:**
 
 ```bash
-# Gerar chaves seguras (macOS/Linux)
+# 🐧 macOS / Linux
 openssl rand -hex 32
 openssl rand -hex 32
 
-# Gerar chaves seguras (Windows PowerShell)
+# 🪟 Windows PowerShell
+$bytes = New-Object Byte[] 32; (New-Object Random).NextBytes($bytes); [Convert]::ToHexString($bytes)
 $bytes = New-Object Byte[] 32; (New-Object Random).NextBytes($bytes); [Convert]::ToHexString($bytes)
 ```
 
-**Arquivo `.env` (exemplo)**
+Copie os valores gerados para `JWT_ACCESS_SECRET` e `JWT_REFRESH_SECRET` no `.env`.
+
+**Conteúdo do `.env_exemplo`:**
 
 ```env
 NODE_ENV=development
@@ -126,10 +141,12 @@ JWT_ACCESS_EXPIRATION=15m
 JWT_REFRESH_EXPIRATION=7d
 ```
 
-**⚠️ IMPORTANTE:**
-- O arquivo `.env` está incluído em `.gitignore` e **NÃO será commitado**
-- Compartilhe o arquivo `.env_exemplo` com outros desenvolvedores
-- Em produção, use um gerenciador de segredos (AWS Secrets Manager, HashiCorp Vault, etc.)
+**⚠️ Informações Importantes:**
+
+- ✅ O arquivo `.env_exemplo` contém **apenas o modelo de código**
+- ✅ O arquivo `.env` gerado está incluído em `.gitignore` e **NUNCA será commitado**
+- ✅ Compartilhe apenas o arquivo `.env_exemplo` com outros desenvolvedores
+- ✅ Em produção, use um gerenciador de segredos (AWS Secrets Manager, HashiCorp Vault, etc.) ao invés de arquivo `.env`
 
 ### 4. Iniciar o Servidor
 
