@@ -689,4 +689,4 @@ Quando todos os testes passarem:
 
 ---
 
-**Versão 1.0 - 17 de abril de 2026**
+**Versão 1.0 - 15 de abril de 2026**

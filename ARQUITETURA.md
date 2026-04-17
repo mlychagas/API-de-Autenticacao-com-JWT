@@ -711,4 +711,4 @@ const secret = await secretsManager.getSecretValue({ SecretId: 'jwt-secrets' }).
 ---
 
 **Documentação Técnica - Versão 1.0**  
-**Última atualização: 17 de abril de 2026**
+**Última atualização: 15 de abril de 2026**
