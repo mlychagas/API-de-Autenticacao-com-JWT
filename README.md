@@ -93,26 +93,43 @@ npm install
 
 ### 3. Configurar Variáveis de Ambiente
 
-O arquivo `.env` já está configurado com valores de exemplo. **Em produção**, gere chaves fortes:
+**Opção A: Usando o arquivo `.env_exemplo` (Recomendado)**
+
+```bash
+# 1. Copie o arquivo de exemplo
+cp .env_exemplo .env
+
+# 2. Edite o arquivo .env com seus valores
+# - Substitua as chaves de exemplo por chaves fortes
+# - Ajuste PORT se necessário (padrão: 3000)
+```
+
+**Opção B: Gerar chaves seguras para produção**
 
 ```bash
 # Gerar chaves seguras (macOS/Linux)
+openssl rand -hex 32
 openssl rand -hex 32
 
 # Gerar chaves seguras (Windows PowerShell)
 $bytes = New-Object Byte[] 32; (New-Object Random).NextBytes($bytes); [Convert]::ToHexString($bytes)
 ```
 
-Atualize o `.env`:
+**Arquivo `.env` (exemplo)**
 
 ```env
 NODE_ENV=development
 PORT=3000
-JWT_ACCESS_SECRET=<sua_chave_super_forte_64_hex_characters>
-JWT_REFRESH_SECRET=<outra_chave_super_forte_64_hex_characters>
+JWT_ACCESS_SECRET=sua_chave_super_forte_para_access_token_dev_123456789012345
+JWT_REFRESH_SECRET=sua_outra_chave_super_forte_para_refresh_token_dev_987654321
 JWT_ACCESS_EXPIRATION=15m
 JWT_REFRESH_EXPIRATION=7d
 ```
+
+**⚠️ IMPORTANTE:**
+- O arquivo `.env` está incluído em `.gitignore` e **NÃO será commitado**
+- Compartilhe o arquivo `.env_exemplo` com outros desenvolvedores
+- Em produção, use um gerenciador de segredos (AWS Secrets Manager, HashiCorp Vault, etc.)
 
 ### 4. Iniciar o Servidor
 
