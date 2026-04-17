@@ -561,5 +561,3 @@ Instale a extensão `REST Client`. Veja o arquivo `exemplos-requisicoes.rest`.
 MIT
 
 ---
-
-**Desenvolvido com ❤️ por um Engenheiro de Software Sênior**
